@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OSCE - Program Studi Keperawatan UMS</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts - Poppins -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        line-height: 1.6;
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      /* Custom CSS Variables */
+      :root {
+        --primary-blue: #1e40af;
+        --secondary-blue: #3b82f6;
+        --light-blue: #60a5fa;
+        --accent-red: #ef4444;
+        --light-red: #f87171;
+        --dark-gray: #1e293b;
+        --light-gray: #f8fafc;
+      }
+
+      /* Header */
+      .navbar {
+        background: linear-gradient(
+          135deg,
+          var(--primary-blue),
+          var(--secondary-blue)
+        ) !important;
+        padding: 1rem 0;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .navbar-brand {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: white !important;
+      }
+
+      .navbar-brand::before {
+        content: "🏥";
+        margin-right: 10px;
+        font-size: 2rem;
+      }
+
+      .navbar-nav .nav-link {
+        color: white !important;
+        font-weight: 500;
+        margin: 0 0.5rem;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .navbar-nav .nav-link:hover {
+        color: var(--light-blue) !important;
+        transform: translateY(-2px);
+      }
+
+      .navbar-nav .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 50%;
+        background-color: var(--light-blue);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+
+      .navbar-nav .nav-link:hover::after {
+        width: 80%;
+      }
+
+      /* Hero Section */
+      .hero-section {
+        background: linear-gradient(
+          135deg,
+          var(--primary-blue),
+          var(--secondary-blue),
+          var(--light-blue)
+        );
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        padding-top: 100px;
+      }
+
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        opacity: 0.3;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-title {
+        font-size: 4rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(45deg, #fff, #e0e7ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1.1;
+      }
+
+      .hero-subtitle {
+        font-size: 1.4rem;
+        margin-bottom: 2.5rem;
+        opacity: 0.9;
+        font-weight: 400;
+      }
+
+      .btn-primary-custom {
+        background: linear-gradient(45deg, var(--accent-red), var(--light-red));
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(239, 68, 68, 0.3);
+      }
+
+      .btn-primary-custom:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(239, 68, 68, 0.4);
+        background: linear-gradient(45deg, #dc2626, var(--accent-red));
+      }
+
+      /* Floating Elements */
+      .floating-elements {
+        position: relative;
+        height: 500px;
+      }
+
+      .floating-card {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 20px;
+        padding: 1.5rem;
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        text-align: center;
+        transition: all 0.3s ease;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .floating-card:hover {
+        transform: scale(1.05) translateY(-10px) !important;
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      .floating-card:nth-child(1) {
+        top: 50px;
+        left: 20px;
+        animation-delay: 0s;
+      }
+
+      .floating-card:nth-child(2) {
+        top: 20px;
+        right: 50px;
+        animation-delay: 2s;
+      }
+
+      .floating-card:nth-child(3) {
+        bottom: 100px;
+        left: 50px;
+        animation-delay: 4s;
+      }
+
+      .floating-card:nth-child(4) {
+        bottom: 50px;
+        right: 20px;
+        animation-delay: 1s;
+      }
+
+      .floating-card:nth-child(5) {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation-delay: 3s;
+        background: rgba(255, 255, 255, 0.25);
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+      }
+
+      .floating-card i {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        color: white;
+      }
+
+      .floating-card span {
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      /* Features Section */
+      .features-section {
+        padding: 5rem 0;
+        background: linear-gradient(135deg, var(--light-gray), #e2e8f0);
+      }
+
+      .section-title {
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--primary-blue);
+        margin-bottom: 3rem;
+      }
+
+      .feature-card {
+        background: white;
+        border-radius: 20px;
+        padding: 2.5rem;
+        text-align: center;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: none;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .feature-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(
+          45deg,
+          var(--secondary-blue),
+          var(--light-blue)
+        );
+      }
+
+      .feature-card:hover {
+        transform: translateY(-15px);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+      }
+
+      .feature-icon {
+        font-size: 3.5rem;
+        color: var(--secondary-blue);
+        margin-bottom: 1.5rem;
+      }
+
+      .feature-card h4 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--primary-blue);
+      }
+
+      .feature-card p {
+        font-size: 1rem;
+        color: #64748b;
+        line-height: 1.6;
+      }
+
+      /* About Section */
+      .about-section {
+        padding: 5rem 0;
+        background: white;
+      }
+
+      .about-visual {
+        background: linear-gradient(
+          135deg,
+          var(--secondary-blue),
+          var(--light-blue)
+        );
+        border-radius: 25px;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 5rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .about-visual::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 10px,
+          rgba(255, 255, 255, 0.1) 10px,
+          rgba(255, 255, 255, 0.1) 20px
+        );
+        animation: rotate 20s linear infinite;
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
+
+      .about-text h2 {
+        font-size: 2.75rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        color: var(--primary-blue);
+      }
+
+      .about-text p {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        color: #64748b;
+        line-height: 1.7;
+      }
+
+      /* CTA Section */
+      .cta-section {
+        background: linear-gradient(
+          135deg,
+          var(--primary-blue),
+          var(--secondary-blue)
+        );
+        color: white;
+        padding: 4rem 0;
+      }
+
+      .cta-section h2 {
+        font-size: 2.75rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+      }
+
+      .cta-section p {
+        font-size: 1.3rem;
+        margin-bottom: 2.5rem;
+        opacity: 0.9;
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--dark-gray);
+        color: white;
+        padding: 3rem 0 2rem;
+      }
+
+      .footer h5 {
+        color: var(--light-blue);
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+      }
+
+      .footer p,
+      .footer li {
+        opacity: 0.8;
+        margin-bottom: 0.5rem;
+      }
+
+      .footer a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer a:hover {
+        color: var(--light-blue);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid #334155;
+        padding-top: 2rem;
+        margin-top: 2rem;
+        text-align: center;
+        opacity: 0.7;
+      }
+
+      /* Animations */
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease;
+      }
+
+      .fade-in-up.animate {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.1rem;
+        }
+
+        .section-title {
+          font-size: 2.25rem;
+        }
+
+        .floating-elements {
+          height: 300px;
+        }
+
+        .floating-card {
+          padding: 1rem;
+        }
+
+        .floating-card i {
+          font-size: 1.5rem;
+        }
+
+        .floating-card span {
+          font-size: 0.8rem;
+        }
+      }
+
+      /* Navbar scroll effect */
+      .navbar-scrolled {
+        background: rgba(30, 64, 175, 0.95) !important;
+        backdrop-filter: blur(15px);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#home">OSCE UMS</a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon" style="filter: invert(1)"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#home">Beranda</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#features">Fitur</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">Tentang</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Kontak</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn btn-outline-light ms-lg-3" href="/login">
+                Login
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 hero-content">
+            <h1 class="hero-title">OSCE Digital Platform</h1>
+            <p class="hero-subtitle">
+              Sistem ujian OSCE (Objective Structured Clinical Examination)
+              modern dan komprehensif untuk Program Studi Keperawatan
+              Universitas Muhammadiyah Surakarta
+            </p>
+            <button class="btn btn-primary-custom btn-lg" onclick="startExam()">
+              <i class="bi bi-play-circle me-2"></i>Mulai Ujian
+            </button>
+          </div>
+          <div class="col-lg-6">
+            <div class="floating-elements">
+              <div class="floating-card">
+                <i class="bi bi-clipboard-check"></i>
+                <span>Penilaian</span>
+              </div>
+              <div class="floating-card">
+                <i class="bi bi-stopwatch"></i>
+                <span>Timer</span>
+              </div>
+              <div class="floating-card">
+                <i class="bi bi-graph-up"></i>
+                <span>Statistik</span>
+              </div>
+              <div class="floating-card">
+                <i class="bi bi-bullseye"></i>
+                <span>Simulasi</span>
+              </div>
+              <div class="floating-card">🏥</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="section-title">Fitur Unggulan</h2>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="feature-card fade-in-up">
+              <div class="feature-icon">
+                <i class="bi bi-laptop"></i>
+              </div>
+              <h4>Interface Modern</h4>
+              <p>
+                Antarmuka yang intuitif dan mudah digunakan, dirancang khusus
+                untuk pengalaman ujian OSCE yang optimal
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="feature-card fade-in-up">
+              <div class="feature-icon">
+                <i class="bi bi-clock-history"></i>
+              </div>
+              <h4>Real-time Timer</h4>
+              <p>
+                Sistem waktu real-time yang akurat untuk setiap station,
+                membantu mahasiswa mengelola waktu dengan efektif
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="feature-card fade-in-up">
+              <div class="feature-icon">
+                <i class="bi bi-bar-chart-line"></i>
+              </div>
+              <h4>Analisis Performa</h4>
+              <p>
+                Dashboard analisis lengkap dengan grafik dan statistik untuk
+                memantau perkembangan kemampuan klinis
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="feature-card fade-in-up">
+              <div class="feature-icon">
+                <i class="bi bi-shield-check"></i>
+              </div>
+              <h4>Keamanan Tinggi</h4>
+              <p>
+                Sistem keamanan berlapis untuk menjaga integritas ujian dan
+                melindungi data mahasiswa
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="feature-card fade-in-up">
+              <div class="feature-icon">
+                <i class="bi bi-phone-landscape"></i>
+              </div>
+              <h4>Responsif</h4>
+              <p>
+                Dapat diakses melalui berbagai perangkat - desktop, tablet,
+                maupun smartphone dengan kualitas yang sama
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="feature-card fade-in-up">
+              <div class="feature-icon">
+                <i class="bi bi-crosshair"></i>
+              </div>
+              <h4>Simulasi Realistis</h4>
+              <p>
+                Simulasi skenario klinis yang realistis untuk mempersiapkan
+                mahasiswa dalam situasi nyata
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 fade-in-up">
+            <div class="about-text">
+              <h2>Tentang OSCE UMS</h2>
+              <p>
+                Platform ujian OSCE digital ini dikembangkan khusus untuk
+                Program Studi Keperawatan Universitas Muhammadiyah Surakarta,
+                menggabungkan teknologi modern dengan metodologi pendidikan
+                keperawatan terdepan.
+              </p>
+              <p>
+                Sistem ini dirancang untuk memberikan pengalaman ujian yang
+                komprehensif, objektif, dan terstandarisasi, membantu mahasiswa
+                keperawatan mengembangkan kemampuan klinis mereka secara
+                optimal.
+              </p>
+              <p>
+                Dengan fitur-fitur canggih dan interface yang user-friendly,
+                platform ini menjadi solusi terbaik untuk evaluasi kompetensi
+                klinis mahasiswa keperawatan di era digital.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-6 fade-in-up">
+            <div class="about-visual">
+              <span style="z-index: 2; position: relative">🏥</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section text-center">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <h2>Siap Menghadapi Ujian OSCE?</h2>
+            <p>
+              Bergabunglah dengan ribuan mahasiswa keperawatan yang telah
+              merasakan pengalaman ujian OSCE terdepan
+            </p>
+            <button class="btn btn-primary-custom btn-lg" onclick="startExam()">
+              <i class="bi bi-rocket-takeoff me-2"></i>Akses Platform Sekarang
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4">
+            <h5>Program Studi Keperawatan</h5>
+            <p>Universitas Muhammadiyah Surakarta</p>
+            <p>
+              Kampus Terpadu UMS<br />
+              Jl. A. Yani Tromol Pos 1 Pabelan<br />
+              Kartasura, Sukoharjo 57169
+            </p>
+          </div>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <h5>Kontak</h5>
+            <p><i class="bi bi-telephone me-2"></i>(0271) 717417</p>
+            <p><i class="bi bi-envelope me-2"></i>keperawatan@ums.ac.id</p>
+            <p><i class="bi bi-globe me-2"></i>www.ums.ac.id</p>
+          </div>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <h5>Quick Links</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="#" class="text-decoration-none">Panduan Ujian</a>
+              </li>
+              <li><a href="#" class="text-decoration-none">FAQ</a></li>
+              <li><a href="#" class="text-decoration-none">Support</a></li>
+              <li><a href="#" class="text-decoration-none">Download App</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Program Studi Keperawatan UMS. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap 5 JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            const navbarHeight = document.querySelector(".navbar").offsetHeight;
+            const targetPosition = target.offsetTop - navbarHeight;
+
+            window.scrollTo({
+              top: targetPosition,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+
+      // Navbar scroll effect
+      window.addEventListener("scroll", function () {
+        const navbar = document.querySelector(".navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("navbar-scrolled");
+        } else {
+          navbar.classList.remove("navbar-scrolled");
+        }
+      });
+
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all fade-in-up elements
+      document.addEventListener("DOMContentLoaded", () => {
+        const fadeElements = document.querySelectorAll(".fade-in-up");
+        fadeElements.forEach((element) => {
+          observer.observe(element);
+        });
+      });
+
+      // Start exam function with Bootstrap modal
+      function startExam() {
+        // Create Bootstrap modal
+        const modalHTML = `
+                <div class="modal fade" id="examModal" tabindex="-1" aria-labelledby="examModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content" style="border-radius: 15px; border: none;">
+                            <div class="modal-header border-0 text-center">
+                                <h3 class="modal-title w-100" id="examModalLabel" style="color: var(--primary-blue);">
+                                    <i class="bi bi-hospital" style="font-size: 3rem; display: block; margin-bottom: 1rem;"></i>
+                                    Persiapan Ujian OSCE
+                                </h3>
+                            </div>
+                            <div class="modal-body text-center px-4">
+                                <p style="color: #64748b; font-size: 1.1rem; line-height: 1.6;">
+                                    Pastikan Anda telah mempersiapkan diri dengan baik. 
+                                    Ujian akan dimulai setelah Anda mengklik tombol di bawah ini.
+                                </p>
+                            </div>
+                            <div class="modal-footer border-0 justify-content-center">
+                                <button type="button" class="btn btn-secondary btn-lg me-2" data-bs-dismiss="modal" style="border-radius: 10px;">
+                                    <i class="bi bi-x-circle me-2"></i>Batal
+                                </button>
+                                <button type="button" class="btn btn-primary-custom btn-lg" onclick="proceedToExam()" style="border-radius: 10px;">
+                                    <i class="bi bi-play-circle me-2"></i>Mulai Ujian
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+        // Add modal to body if it doesn't exist
+        if (!document.getElementById("examModal")) {
+          document.body.insertAdjacentHTML("beforeend", modalHTML);
+        }
+
+        // Show modal
+        const examModal = new bootstrap.Modal(
+          document.getElementById("examModal")
+        );
+        examModal.show();
+      }
+
+      // Proceed to exam function
+      function proceedToExam() {
+        // Hide modal first
+        const examModal = bootstrap.Modal.getInstance(
+          document.getElementById("examModal")
+        );
+        examModal.hide();
+
+        // Show success alert
+        setTimeout(() => {
+          const alertHTML = `
+                    <div class="alert alert-success alert-dismissible fade show position-fixed" role="alert" 
+                         style="top: 100px; right: 20px; z-index: 9999; min-width: 300px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                        <i class="bi bi-check-circle-fill me-2"></i>
+                        <strong>Sistem ujian akan segera dimuat...</strong><br>
+                        <small>Dalam implementasi nyata, ini akan mengarahkan ke aplikasi ujian OSCE.</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                `;
+          document.body.insertAdjacentHTML("beforeend", alertHTML);
+
+          // Auto hide alert after 5 seconds
+          setTimeout(() => {
+            const alert = document.querySelector(".alert");
+            if (alert) {
+              const bsAlert = new bootstrap.Alert(alert);
+              bsAlert.close();
+            }
+          }, 5000);
+        }, 300);
+      }
+
+      // Enhanced floating card interactions
+      document.addEventListener("DOMContentLoaded", () => {
+        const floatingCards = document.querySelectorAll(".floating-card");
+
+        floatingCards.forEach((card) => {
+          card.addEventListener("mouseenter", function () {
+            this.style.animationPlayState = "paused";
+          });
+
+          card.addEventListener("mouseleave", function () {
+            this.style.animationPlayState = "running";
+          });
+        });
+      });
+
+      // Add parallax effect to hero section
+      window.addEventListener("scroll", () => {
+        const scrolled = window.pageYOffset;
+        const parallax = document.querySelector(".hero-section");
+        if (parallax) {
+          const speed = scrolled * 0.5;
+          parallax.style.transform = `translateY(${speed}px)`;
+        }
+      });
+
+      // Add typing effect to hero title (optional enhancement)
+      function typeWriter(element, text, speed = 100) {
+        let i = 0;
+        element.innerHTML = "";
+
+        function typing() {
+          if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, speed);
+          }
+        }
+        typing();
+      }
+
+      // Initialize typing effect on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        const heroTitle = document.querySelector(".hero-title");
+        if (heroTitle) {
+          const originalText = heroTitle.textContent;
+          setTimeout(() => {
+            typeWriter(heroTitle, originalText, 80);
+          }, 500);
+        }
+      });
+
+      // Add click effect to feature cards
+      document.querySelectorAll(".feature-card").forEach((card) => {
+        card.addEventListener("click", function () {
+          // Add ripple effect
+          const ripple = document.createElement("div");
+          ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(59, 130, 246, 0.3);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          ripple.style.width = ripple.style.height = size + "px";
+          ripple.style.left = rect.width / 2 - size / 2 + "px";
+          ripple.style.top = rect.height / 2 - size / 2 + "px";
+
+          this.style.position = "relative";
+          this.appendChild(ripple);
+
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+        });
+      });
+
+      // Add CSS for ripple animation
+      const style = document.createElement("style");
+      style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+      document.head.appendChild(style);
+
+      // Add smooth counter animation for statistics (if needed)
+      function animateCounter(element, start, end, duration) {
+        const range = end - start;
+        const increment = range / (duration / 16);
+        let current = start;
+
+        const timer = setInterval(() => {
+          current += increment;
+          element.textContent = Math.floor(current);
+
+          if (current >= end) {
+            element.textContent = end;
+            clearInterval(timer);
+          }
+        }, 16);
+      }
+
+      // Auto-hide navbar on scroll down, show on scroll up
+      let lastScrollTop = 0;
+      window.addEventListener(
+        "scroll",
+        function () {
+          const currentScroll =
+            window.pageYOffset || document.documentElement.scrollTop;
+          const navbar = document.querySelector(".navbar");
+
+          if (currentScroll > lastScrollTop && currentScroll > 100) {
+            // Scrolling down
+            navbar.style.transform = "translateY(-100%)";
+          } else {
+            // Scrolling up
+            navbar.style.transform = "translateY(0)";
+          }
+
+          lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        },
+        false
+      );
+    </script>
+  </body>
+</html>
