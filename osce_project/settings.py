@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from django.templatetags.static import static
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -117,6 +118,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
@@ -126,3 +128,229 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Unfold Admin Configuration
+UNFOLD = {
+    "SITE_TITLE": "OSCE Keperawatan",
+    "SITE_HEADER": "OSCE Keperawatan Management System",
+    "SITE_URL": "/",
+    "SITE_ICON": {
+        "light": "path/to/logo-light.svg",
+        "dark": "path/to/logo-dark.svg",
+    },
+    "SITE_LOGO": {
+        "light": "path/to/logo-light.svg",
+        "dark": "path/to/logo-dark.svg",
+    },
+    "SITE_SYMBOL": "🏥",
+    "SHOW_HISTORY": True,
+    "SHOW_VIEW_ON_SITE": True,
+    "ENVIRONMENT": "osce_project.utils.environment_callback",
+    "DASHBOARD_CALLBACK": "osce_project.utils.dashboard_callback",
+    "LOGIN": {
+        "image": "path/to/login-bg.jpg",
+        "redirect_after": "/admin/",
+    },
+    "STYLES": [
+        lambda request: static("css/custom.css"),
+    ],
+    "SCRIPTS": [
+        lambda request: static("js/custom.js"),
+    ],
+    "COLORS": {
+        "primary": {
+            "50": "250 245 255",
+            "100": "243 232 255", 
+            "200": "233 213 255",
+            "300": "196 181 253",
+            "400": "147 51 234",
+            "500": "124 58 237",
+            "600": "109 40 217",
+            "700": "91 33 182",
+            "800": "76 29 149",
+            "900": "59 7 100",
+            "950": "35 25 74"
+        },
+    },
+    "EXTENSIONS": {
+        "modeltranslation": {
+            "flags": {
+                "en": "🇺🇸",
+                "fr": "🇫🇷",
+                "nl": "🇳🇱",
+            },
+        },
+    },
+    "SIDEBAR": {
+        "show_search": True,
+        "show_all_applications": False,
+        "navigation": [
+            {
+                "title": "Dashboard",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Dashboard",
+                        "icon": "dashboard",
+                        "link": "/admin/",
+                    },
+                ],
+            },
+            {
+                "title": "Master Data",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Fakultas",
+                        "icon": "school",
+                        "link": "/admin/master/fakultas/",
+                    },
+                    {
+                        "title": "Program Studi",
+                        "icon": "book",
+                        "link": "/admin/master/programstudi/",
+                    },
+                    {
+                        "title": "Semester Akademik",
+                        "icon": "calendar_month",
+                        "link": "/admin/master/semesterakademik/",
+                    },
+                    {
+                        "title": "Mahasiswa",
+                        "icon": "person",
+                        "link": "/admin/master/mahasiswa/",
+                    },
+                    {
+                        "title": "Dosen",
+                        "icon": "person_outline",
+                        "link": "/admin/master/dosen/",
+                    },
+                ],
+            },
+            {
+                "title": "Bank Soal",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Kategori Soal",
+                        "icon": "category",
+                        "link": "/admin/master/kategorisoal/",
+                    },
+                    {
+                        "title": "Bank Soal",
+                        "icon": "quiz",
+                        "link": "/admin/master/banksoal/",
+                    },
+                    {
+                        "title": "Bank Aspek Penilaian",
+                        "icon": "checklist",
+                        "link": "/admin/master/bankaspekpenilaian/",
+                    },
+                ],
+            },
+            {
+                "title": "Ujian",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Jadwal Ujian",
+                        "icon": "schedule",
+                        "link": "/admin/ujian/jadwalujian/",
+                    },
+                    {
+                        "title": "Aspek Ujian",
+                        "icon": "assignment",
+                        "link": "/admin/ujian/aspekujian/",
+                    },
+                    {
+                        "title": "Kelompok Ujian",
+                        "icon": "group",
+                        "link": "/admin/ujian/kelompokujian/",
+                    },
+                ],
+            },
+            {
+                "title": "Alokasi",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Alokasi Mahasiswa",
+                        "icon": "person_add",
+                        "link": "/admin/alokasi/alokasimahasiswa/",
+                    },
+                    {
+                        "title": "Alokasi Dosen",
+                        "icon": "supervisor_account",
+                        "link": "/admin/alokasi/alokasidosen/",
+                    },
+                ],
+            },
+            {
+                "title": "Penilaian",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Nilai Mahasiswa",
+                        "icon": "grade",
+                        "link": "/admin/penilaian/nilaimahasiswa/",
+                    },
+                ],
+            },
+            {
+                "title": "System",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Users",
+                        "icon": "people",
+                        "link": "/admin/auth/user/",
+                    },
+                    {
+                        "title": "Groups",
+                        "icon": "security",
+                        "link": "/admin/auth/group/",
+                    },
+                ],
+            },
+        ],
+    },
+    "TABS": [
+        {
+            "models": [
+                "master.fakultas",
+                "master.programstudi",
+            ],
+            "items": [
+                {
+                    "title": "Fakultas",
+                    "link": "/admin/master/fakultas/",
+                },
+                {
+                    "title": "Program Studi", 
+                    "link": "/admin/master/programstudi/",
+                },
+            ],
+        },
+        {
+            "models": [
+                "ujian.jadwalujian",
+                "ujian.aspekujian", 
+                "ujian.kelompokujian",
+            ],
+            "items": [
+                {
+                    "title": "Jadwal Ujian",
+                    "link": "/admin/ujian/jadwalujian/",
+                },
+                {
+                    "title": "Aspek Ujian",
+                    "link": "/admin/ujian/aspekujian/",
+                },
+                {
+                    "title": "Kelompok Ujian",
+                    "link": "/admin/ujian/kelompokujian/",
+                },
+            ],
+        },
+    ],
+}
