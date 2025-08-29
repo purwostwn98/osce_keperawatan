@@ -135,18 +135,18 @@ UNFOLD = {
     "SITE_HEADER": "OSCE Keperawatan Management System",
     "SITE_URL": "/",
     "SITE_ICON": {
-        "light": "path/to/logo-light.svg",
-        "dark": "path/to/logo-dark.svg",
+        "light": lambda request: static("images/logo-light.svg"),
+        "dark": lambda request: static("images/logo-dark.svg"),
     },
     "SITE_LOGO": {
-        "light": "path/to/logo-light.svg",
-        "dark": "path/to/logo-dark.svg",
+        "light": lambda request: static("images/logo-light.svg"),
+        "dark": lambda request: static("images/logo-dark.svg"),
     },
     "SITE_SYMBOL": "🏥",
     "SHOW_HISTORY": True,
     "SHOW_VIEW_ON_SITE": True,
     "ENVIRONMENT": "osce_project.utils.environment_callback",
-    "DASHBOARD_CALLBACK": "osce_project.utils.dashboard_callback",
+    # "DASHBOARD_CALLBACK": "osce_project.utils.dashboard_callback",  # Temporarily disabled
     "LOGIN": {
         "image": "path/to/login-bg.jpg",
         "redirect_after": "/admin/",
@@ -159,17 +159,17 @@ UNFOLD = {
     ],
     "COLORS": {
         "primary": {
-            "50": "250 245 255",
-            "100": "243 232 255", 
-            "200": "233 213 255",
-            "300": "196 181 253",
-            "400": "147 51 234",
-            "500": "124 58 237",
-            "600": "109 40 217",
-            "700": "91 33 182",
-            "800": "76 29 149",
-            "900": "59 7 100",
-            "950": "35 25 74"
+            "50": "239 246 255",
+            "100": "219 234 254", 
+            "200": "191 219 254",
+            "300": "147 197 253",
+            "400": "96 165 250",
+            "500": "59 130 246",
+            "600": "37 99 235",
+            "700": "29 78 216",
+            "800": "30 64 175",
+            "900": "30 58 138",
+            "950": "23 37 84"
         },
     },
     "EXTENSIONS": {
