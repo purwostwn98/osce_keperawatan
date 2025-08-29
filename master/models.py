@@ -74,3 +74,6 @@ class SemesterAkademik(models.Model):
     nama_semester = models.CharField(max_length=255)
     order = models.IntegerField()
 
+    def __str__(self):
+        return f"{self.kode_semester} - {self.nama_semester}"
+
