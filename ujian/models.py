@@ -14,7 +14,7 @@ class JadwalUjian(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.bank_soal.nama_soal} - {self.periode_semester}"
+        return f"{self.bank_soal.nama_soal} - {self.semester_akademik.nama_semester}"
     
 class AspekUjian(models.Model):
     jadwal_ujian = models.ForeignKey(JadwalUjian, on_delete=models.CASCADE)
