@@ -134,6 +134,7 @@ UNFOLD = {
     "SITE_TITLE": "OSCE Keperawatan",
     "SITE_HEADER": "OSCE Keperawatan Management System",
     "SITE_URL": "/",
+    "SIDEBAR_TOGGLE_ENABLED": False,  # Disable sidebar toggle buttons
     "SITE_ICON": {
         "light": lambda request: static("images/logo-light.svg"),
         "dark": lambda request: static("images/logo-dark.svg"),

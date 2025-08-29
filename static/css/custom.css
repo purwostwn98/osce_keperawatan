@@ -111,6 +111,42 @@
     }
 }
 
+/* Disable sidebar toggle button */
+.material-symbols-outlined[hx-get*="toggle-sidebar"] {
+    pointer-events: none !important;
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+}
+
+/* Also disable the mobile version */
+.material-symbols-outlined[x-on\:click*="sidebarMobileOpen"] {
+    pointer-events: none !important;
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+}
+
+/* Alternative: completely hide the sidebar toggle container */
+/*
+span.cursor-pointer.flex.flex-row.items-center {
+    display: none !important;
+}
+*/
+
+/* More specific targeting */
+span.cursor-pointer.flex.flex-row.items-center .material-symbols-outlined {
+    pointer-events: none !important;
+    opacity: 0.3 !important;
+    cursor: not-allowed !important;
+    filter: grayscale(100%);
+}
+
+/* Alternative: completely hide the sidebar toggle */
+/*
+.material-symbols-outlined[hx-get*="toggle-sidebar"] {
+    display: none !important;
+}
+*/
+
 /* Loading animation */
 .loading-spinner {
     border: 3px solid #f3f3f3;

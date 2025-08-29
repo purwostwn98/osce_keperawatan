@@ -83,6 +83,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Disable sidebar toggle buttons
+    disableSidebarToggle();
+
     // Initialize charts if Chart.js is available
     if (typeof Chart !== 'undefined') {
         initializeDashboardCharts();
@@ -224,6 +227,30 @@ function formatDate(date) {
     return new Intl.DateTimeFormat('id-ID').format(new Date(date));
 }
 
+// Function to disable sidebar toggle
+function disableSidebarToggle() {
+    // Find all sidebar toggle elements
+    const sidebarToggles = document.querySelectorAll('.material-symbols-outlined[hx-get*="toggle-sidebar"]');
+    
+    sidebarToggles.forEach(function(toggle) {
+        // Disable click events
+        toggle.style.pointerEvents = 'none';
+        toggle.style.opacity = '0.5';
+        toggle.style.cursor = 'not-allowed';
+        
+        // Remove hx-get attribute to prevent HTMX requests
+        toggle.removeAttribute('hx-get');
+        
+        // Remove Alpine.js click handler
+        toggle.removeAttribute('x-on:click');
+        
+        // Add disabled class
+        toggle.classList.add('disabled');
+    });
+    
+    console.log('Sidebar toggle buttons disabled');
+}
+
 // Export functions for global use
 window.OSCEAdmin = {
     refreshDashboardMetrics,
@@ -234,5 +261,6 @@ window.OSCEAdmin = {
     exportData,
     showNotification,
     formatNumber,
+    disableSidebarToggle,
     formatDate
 };
