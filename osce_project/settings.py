@@ -105,9 +105,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'id'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Jakarta'
 
 USE_I18N = True
 
@@ -145,6 +145,7 @@ UNFOLD = {
     "SITE_SYMBOL": "🏥",
     "SHOW_HISTORY": True,
     "SHOW_VIEW_ON_SITE": True,
+    "SHOW_TIMEZONE_WARNING": False,  # Disable timezone warning
     "ENVIRONMENT": "osce_project.utils.environment_callback",
     # "DASHBOARD_CALLBACK": "osce_project.utils.dashboard_callback",  # Temporarily disabled
     "LOGIN": {
