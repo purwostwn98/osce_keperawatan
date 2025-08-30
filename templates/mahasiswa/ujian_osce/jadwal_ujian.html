@@ -1,0 +1,80 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title fw-semibold">Jadwal Ujian OSCE Mahasiswa</h4>
+      </div>
+      <div class="card-body p-4">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="semesterAkademik" class="form-label"
+                >Semester Akademik</label
+              >
+              <select class="form-select" id="semesterAkademik">
+                <option value="">Pilih Semester Akademik</option>
+                <option value="20231">2023/2024 Ganjil</option>
+                <option value="20232">2023/2024 Genap</option>
+                <option value="20241">2024/2025 Ganjil</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <table
+                class="table table-bordered text-nowrap customize-table mb-0 align-middle"
+              >
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Kode Mata Kuliah</th>
+                    <th>Nama Ujian</th>
+                    <th>Waktu Mulai</th>
+                    <th>Waktu Selesai</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>MK001</td>
+                    <td>Ujian OSCE Keperawatan Dasar</td>
+                    <td>Senin, 2024-07-20 08:00</td>
+                    <td>Senin, 2024-07-20 10:00</td>
+                    <td>
+                      <button class="btn btn-primary btn-sm">Lihat</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>MK002</td>
+                    <td>Ujian OSCE Keperawatan Medikal Bedah</td>
+                    <td>Selasa, 2024-07-21 09:00</td>
+                    <td>Selasa, 2024-07-21 11:00</td>
+                    <td>
+                      <button class="btn btn-primary btn-sm">Lihat</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>MK003</td>
+                    <td>Ujian OSCE Keperawatan Anak</td>
+                    <td>Rabu, 2024-07-22 10:00</td>
+                    <td>Rabu, 2024-07-22 12:00</td>
+                    <td>
+                      <button class="btn btn-primary btn-sm">Lihat</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}
+</div>

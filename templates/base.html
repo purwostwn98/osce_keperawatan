@@ -14,7 +14,7 @@
   <!-- Core Css -->
   <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}" />
 
-  <title>{% block title %}Solar Filter Maintenance{% endblock %}</title>
+  <title>{% block title %}OSCE UMS{% endblock %}</title>
 </head>
 
 <body>
@@ -49,7 +49,7 @@
             </li>
             <!-- Dashboard -->
             <li class="sidebar-item">
-              <a href="{% url 'dashboard' %}" class="sidebar-link {% if page|length > 1 and page.0 == "dashboard" %}active{% endif %}" aria-expanded="false">
+              <a href="{% url 'index_mahasiswa' %}" class="sidebar-link {% if menu|length > 1 and menu.0 == "home" %}active{% endif %}" aria-expanded="false">
                 <span>
                   <i class="ti ti-aperture"></i>
                 </span>
@@ -62,15 +62,15 @@
                 <span class="d-flex">
                   <i class="ti ti-layout-grid"></i>
                 </span>
-                <span class="hide-menu">Master Data</span>
+                <span class="hide-menu">Ujian OSCE</span>
               </a>
               <ul aria-expanded="false" class="collapse first-level">
                 <li class="sidebar-item">
-                  <a href="/master/list-merek" class="sidebar-link {% if page|length > 1 and page.1 == "merek" %}active{% endif %}">
+                  <a href="{% url 'jadwal_ujian' %}" class="sidebar-link {% if menu|length > 1 and menu.1 == "jadwal_ujian" %}active{% endif %}">
                     <div class="round-16 d-flex align-items-center justify-content-center">
                       <i class="ti ti-circle"></i>
                     </div>
-                    <span class="hide-menu">Merek Truck</span>
+                    <span class="hide-menu">Jadwal Ujian</span>
                   </a>
                 </li>
                 <li class="sidebar-item">
@@ -78,31 +78,7 @@
                     <div class="round-16 d-flex align-items-center justify-content-center">
                       <i class="ti ti-circle"></i>
                     </div>
-                    <span class="hide-menu">Truck</span>
-                  </a>
-                </li>
-                <li class="sidebar-item">
-                  <a href="/master/list-company" class="sidebar-link {% if page|length > 1 and page.1 == "company" %}active{% endif %}">
-                    <div class="round-16 d-flex align-items-center justify-content-center">
-                      <i class="ti ti-circle"></i>
-                    </div>
-                    <span class="hide-menu">Company</span>
-                  </a>
-                </li>
-                <li class="sidebar-item">
-                  <a href="/master/list-vendor" class="sidebar-link {% if page|length > 1 and page.1 == "vendor" %}active{% endif %}">
-                    <div class="round-16 d-flex align-items-center justify-content-center">
-                      <i class="ti ti-circle"></i>
-                    </div>
-                    <span class="hide-menu">Vendor</span>
-                  </a>
-                </li>
-                <li class="sidebar-item">
-                  <a href="/master/list-part" class="sidebar-link {% if page|length > 1 and page.1 == "part" %}active{% endif %}">
-                    <div class="round-16 d-flex align-items-center justify-content-center">
-                      <i class="ti ti-circle"></i>
-                    </div>
-                    <span class="hide-menu">Part</span>
+                    <span class="hide-menu">Lihat Nilai</span>
                   </a>
                 </li>
               </ul>
@@ -116,8 +92,8 @@
               <img src="{% static 'assets/images/profile/user-1.jpg' %}" class="rounded-circle" width="40" height="40" alt="modernize-img" />
             </div>
             <div class="john-title">
-              <h6 class="mb-0 fs-4 fw-semibold">Munajat</h6>
-              <span class="fs-2">Admin</span>
+              <h6 class="mb-0 fs-4 fw-semibold">J10200245</h6>
+              <span class="fs-2">Mahasiswa</span>
             </div>
             <a class="border-0 bg-transparent text-primary ms-auto" tabindex="0" href="/logout" aria-label="logout" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="logout">
               <i class="ti ti-power fs-6"></i>

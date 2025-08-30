@@ -24,6 +24,7 @@ from landing import urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('landing.urls')),
+    path('mahasiswa/', include('mahasiswa.urls')),
 ]
 
 # Add static files serving for development
