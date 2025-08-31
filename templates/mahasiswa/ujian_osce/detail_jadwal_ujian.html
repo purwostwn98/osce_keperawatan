@@ -1,0 +1,204 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title fw-semibold">Detail Jadwal Ujian OSCE</h4>
+      </div>
+      <div class="card-body p-4">
+        <div class="row">
+          <div class="col-md-12">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="pills-informasi-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-informasi"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-informasi"
+                  aria-selected="true"
+                >
+                  Informasi
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="pills-soal-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-soal"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-soal"
+                  aria-selected="false"
+                >
+                  Soal Ujian
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="pills-aspek-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-aspek"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-aspek"
+                  aria-selected="false"
+                >
+                  Aspek Penilaian
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="pills-nilai-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-nilai"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-nilai"
+                  aria-selected="false"
+                >
+                  Nilai
+                </button>
+              </li>
+            </ul>
+            <hr />
+            <div class="tab-content" id="pills-tabContent">
+              <div
+                class="tab-pane fade show active"
+                id="pills-informasi"
+                role="tabpanel"
+                aria-labelledby="pills-informasi-tab"
+                tabindex="0"
+              >
+                <div class="card text-bg-info">
+                  <div class="card-body">
+                    <div class="text-center text-white">
+                      <h4 class="card-title text-white">
+                        MK001 - Keperawatan Dasar
+                      </h4>
+                      <h5 class="fw-light text-white">
+                        Senin, 2023-05-01 08:00 <br />
+                        s.d. <br />
+                        Senin, 2023-05-01 10:00
+                      </h5>
+                      <div class="mt-4">
+                        <span class="display-5 text-white">
+                          <i class="wi wi-day-rain-mix"></i>
+                        </span>
+                        <div class="d-inline-block ms-4">
+                          <h2 class="text-white">Dr. John Doe</h2>
+                          <h4 class="fw-light text-white">Ruang 101</h4>
+                        </div>
+                      </div>
+                      {% comment %}
+                      <div class="row mt-4">
+                        <div class="col-md-12">
+                          <div class="row text-center">
+                            <div class="col-6 col-md-2">
+                              <div class="mb-2">TUE</div>
+                              <i class="ti ti-cloud fs-7 mb-2"></i>
+                              <div>
+                                24°
+                                <span>C</span>
+                              </div>
+                            </div>
+                            <div class="col-6 col-md-2">
+                              <div class="mb-2">WED</div>
+                              <i class="ti ti-cloud fs-7 mb-2"></i>
+                              <div>
+                                21°
+                                <span>C</span>
+                              </div>
+                            </div>
+                            <div class="col-6 col-md-2">
+                              <div class="mb-2">THU</div>
+                              <i class="ti ti-sun-high fs-7 mb-2"></i>
+                              <div>
+                                25°
+                                <span>C</span>
+                              </div>
+                            </div>
+                            <div class="col-6 col-md-2">
+                              <div class="mb-2">FRI</div>
+                              <i class="ti ti-cloud-fog fs-7 mb-2"></i>
+                              <div>
+                                20°
+                                <span>C</span>
+                              </div>
+                            </div>
+                            <div class="col-6 col-md-2">
+                              <div class="mb-2">SAT</div>
+                              <i class="ti ti-cloud-storm fs-7 mb-2"></i>
+                              <div>
+                                18°
+                                <span>C</span>
+                              </div>
+                            </div>
+                            <div class="col-6 col-md-2">
+                              <div class="mb-2">SUN</div>
+                              <i class="ti ti-cloud-rain fs-7 mb-2"></i>
+                              <div>
+                                14°
+                                <span>C</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      {% endcomment %}
+                    </div>
+                  </div>
+                </div>
+                {% comment %}
+                <h5>Informasi Ujian</h5>
+                <p><strong>Mata Kuliah:</strong> Keperawatan Dasar</p>
+                <p><strong>Kode Mata Kuliah:</strong> MK001</p>
+                <p><strong>Waktu Mulai:</strong> Senin, 2023-05-01 08:00</p>
+                <p><strong>Waktu Selesai:</strong> Senin, 2023-05-01 10:00</p>
+                <p><strong>Ruang Ujian:</strong> Ruang 101</p>
+                <p><strong>Pengawas Ujian:</strong> Dr. John Doe</p>
+                {% endcomment %}
+              </div>
+              <div
+                class="tab-pane fade"
+                id="pills-soal"
+                role="tabpanel"
+                aria-labelledby="pills-soal-tab"
+                tabindex="0"
+              >
+                <h5>Soal Ujian</h5>
+                <p>Soal ujian akan ditampilkan di sini.</p>
+              </div>
+              <div
+                class="tab-pane fade"
+                id="pills-aspek"
+                role="tabpanel"
+                aria-labelledby="pills-aspek-tab"
+                tabindex="0"
+              >
+                <h5>Aspek Penilaian</h5>
+                <p>Aspek penilaian akan ditampilkan di sini.</p>
+              </div>
+              <div
+                class="tab-pane fade"
+                id="pills-nilai"
+                role="tabpanel"
+                aria-labelledby="pills-nilai-tab"
+                tabindex="0"
+              >
+                <h5>Nilai</h5>
+                <p>Nilai ujian akan ditampilkan di sini.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}
+</div>

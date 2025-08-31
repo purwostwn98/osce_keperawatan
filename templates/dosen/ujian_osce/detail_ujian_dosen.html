@@ -1,0 +1,109 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title fw-semibold">Detail Jadwal Ujian OSCE</h4>
+      </div>
+      <div class="card-body p-4">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card text-bg-info">
+              <div class="card-body">
+                <div class="text-center text-white">
+                  <h4 class="card-title text-white">
+                    MK001 - Keperawatan Dasar
+                  </h4>
+                  <h5 class="fw-light text-white">
+                    Senin, 2023-05-01 08:00 <br />
+                    s.d. <br />
+                    Senin, 2023-05-01 10:00
+                  </h5>
+                  <div class="mt-4">
+                    <span class="display-5 text-white">
+                      <i class="wi wi-day-rain-mix"></i>
+                    </span>
+                    <div class="d-inline-block ms-4">
+                      <h2 class="text-white">Dr. John Doe</h2>
+                      <h4 class="fw-light text-white">Ruang 101</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p>Daftar Mahasiswa</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <table
+                class="table table-bordered text-nowrap customize-table mb-0 align-middle"
+              >
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>NIM</th>
+                    <th>Nama Mahasiswa</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>J10200245</td>
+                    <td>Jane Doe</td>
+                    <td>
+                      <a
+                        href="{% url 'penilaian_ujian_dosen' 10200245 %}"
+                        class="btn btn-primary btn-sm"
+                        >Nilai</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>J10200246</td>
+                    <td>John Smith</td>
+                    <td>
+                      <button class="btn btn-primary btn-sm">Nilai</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>J10200247</td>
+                    <td>Mary Johnson</td>
+                    <td>
+                      <button class="btn btn-primary btn-sm">Nilai</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>J10200248</td>
+                    <td>James Brown</td>
+                    <td>
+                      <button class="btn btn-primary btn-sm">Nilai</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>J10200249</td>
+                    <td>Patricia Williams</td>
+                    <td>
+                      <button class="btn btn-primary btn-sm">Nilai</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}
+</div>

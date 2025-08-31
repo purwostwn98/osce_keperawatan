@@ -10,9 +10,10 @@
 
   <!-- Favicon icon-->
   <link rel="shortcut icon" type="image/png" href="{% static 'assets/images/logos/favicon.png' %}" />
-
   <!-- Core Css -->
   <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}" />
+
+  {% block css %}{% endblock css %}
 
   <title>{% block title %}OSCE UMS{% endblock %}</title>
 </head>
@@ -45,7 +46,7 @@
             <!-- Home -->
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu" id="get-url">Admin Maintenance</span>
+              <span class="hide-menu" id="get-url">Mahasiswa</span>
             </li>
             <!-- Dashboard -->
             <li class="sidebar-item">
@@ -79,6 +80,41 @@
                       <i class="ti ti-circle"></i>
                     </div>
                     <span class="hide-menu">Lihat Nilai</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
+            <!-- Dosen -->
+            <li class="nav-small-cap">
+              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+              <span class="hide-menu" id="get-url">Dosen</span>
+            </li>
+            <!-- Dashboard -->
+            <li class="sidebar-item">
+              <a href="{% url 'index_dosen' %}" class="sidebar-link {% if menu|length > 1 and menu.0 == "home-dosen" %}active{% endif %}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-aperture"></i>
+                </span>
+                <span class="hide-menu">Dashboard</span>
+              </a>
+            </li>
+            <!-- Frontend page -->
+            <li class="sidebar-item">
+              <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                <span class="d-flex">
+                  <i class="ti ti-layout-grid"></i>
+                </span>
+                <span class="hide-menu">Ujian OSCE</span>
+              </a>
+              <ul aria-expanded="false" class="collapse first-level">
+                <li class="sidebar-item">
+                  <a href="{% url 'jadwal_ujian_dosen' %}" class="sidebar-link {% if menu|length > 1 and menu.1 == "jadwal_ujian_dosen" %}active{% endif %}">
+                    <div class="round-16 d-flex align-items-center justify-content-center">
+                      <i class="ti ti-circle"></i>
+                    </div>
+                    <span class="hide-menu">Jadwal Ujian</span>
                   </a>
                 </li>
               </ul>

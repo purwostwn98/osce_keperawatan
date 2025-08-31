@@ -18,13 +18,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from landing import urls
+from . import views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('landing.urls')),
     path('mahasiswa/', include('mahasiswa.urls')),
+    path('dosen/', include('dosen.urls'))
 ]
 
 # Add static files serving for development

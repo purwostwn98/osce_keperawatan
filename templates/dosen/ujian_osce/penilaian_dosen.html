@@ -1,0 +1,1218 @@
+{% extends 'base.html' %} {% block css %}
+<style>
+  @media print {
+    body {
+      background: #fff;
+    }
+    .page {
+      margin: 0;
+      padding: 18mm 16mm;
+      box-shadow: none;
+    }
+    .no-print {
+      display: none !important;
+    }
+  }
+
+  /* Header styles */
+  .doc-title {
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 1.25;
+    border: 2px solid #000;
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Box (Nama/NIM) on the right */
+  .id-box {
+    border: 2px solid #000;
+    padding: 0.6rem 0.8rem;
+    min-height: 86px;
+    font-size: 0.95rem;
+  }
+  .id-box label {
+    min-width: 52px;
+    display: inline-block;
+  }
+
+  /* Section heading */
+  .section-title {
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0.4rem 0 0.6rem;
+  }
+
+  /* Table styling to mimic the PDF */
+  table.form-table {
+    border: 2px solid #000 !important;
+    border-collapse: separate !important;
+    border-spacing: 0;
+    font-size: 0.95rem;
+  }
+  table.form-table th,
+  table.form-table td {
+    border: 1px solid #000 !important;
+    vertical-align: top;
+    padding: 0.4rem 0.5rem;
+  }
+  table.form-table thead th {
+    text-align: center;
+  }
+  .nilai-head {
+    width: 220px;
+  }
+  .no-col {
+    width: 42px;
+    text-align: center;
+  }
+
+  /* Notes & signature */
+  .notes {
+    font-size: 0.9rem;
+  }
+  .signature-line {
+    border-bottom: 1px solid #000;
+    min-width: 160px;
+    display: inline-block;
+  }
+  .foot-box {
+    border: 2px solid #000;
+    padding: 0.6rem 0.8rem;
+    display: inline-block;
+    min-width: 240px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  /* Checkbox alignment */
+  .chk-cell {
+    text-align: center;
+    vertical-align: middle !important;
+  }
+</style>
+{% endblock css %} {% block content %} {% load static %}
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title fw-semibold">Formulir Penilian Dosen</h4>
+      </div>
+      <div class="card-body p-4">
+        <div class="row">
+          <div class="col-12">
+            <h5>Soal Ujian OSCE</h5>
+            <iframe
+              class="mt-2"
+              src="{% url 'pdf_view' 'contoh_soal.pdf' %}"
+              width="100%"
+              height="800px"
+            ></iframe>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-12">
+            <div class="page">
+              <!-- Top Controls (optional) -->
+              <div class="d-flex justify-content-end gap-2 no-print mb-3">
+                <button
+                  class="btn btn-sm btn-outline-secondary"
+                  onclick="window.print()"
+                >
+                  Cetak
+                </button>
+              </div>
+
+              <!-- Header -->
+              <div class="row align-items-center mb-2">
+                <div class="col-2 text-center">
+                  <!-- Ganti src logo -->
+                  <img
+                    src="https://dummyimage.com/100x100/cccccc/000000.png&text=LOGO"
+                    alt="Logo"
+                    class="img-fluid"
+                    style="max-height: 90px"
+                  />
+                </div>
+                <div class="col-8">
+                  <div class="doc-title">
+                    Penilaian Pencapaian Kompetensi Aspek Keterampilan<br />
+                    Penggunaan AED pada Pasien Dewasa
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="id-box">
+                    <div><label>Nama</label>: __________________</div>
+                    <div><label>NIM</label> : __________________</div>
+                  </div>
+                </div>
+              </div>
+
+              <h6 class="section-title">Prosedur Tindakan</h6>
+
+              <!-- Form Table -->
+              <div class="table-responsive">
+                <table class="table table-sm form-table">
+                  <thead>
+                    <tr>
+                      <th class="no-col">No.</th>
+                      <th>Kriteria untuk Kerja</th>
+                      <th class="nilai-head" colspan="4">Nilai</th>
+                    </tr>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th class="chk-cell">0</th>
+                      <th class="chk-cell">1</th>
+                      <th class="chk-cell">2</th>
+                      <th class="chk-cell">3</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- 1 -->
+                    <tr>
+                      <td class="no-col">1.</td>
+                      <td>Hidupkan AED.</td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r1"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r1"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r1"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r1"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+                    <!-- 2 -->
+                    <tr>
+                      <td class="no-col">2.</td>
+                      <td>
+                        Ambil bantalan elektroda (Pads AED), pemasangan tetap
+                        dilakukan saat RJP berlangsung.
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r2"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r2"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r2"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r2"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+                    <!-- 3 -->
+                    <tr>
+                      <td class="no-col">3.</td>
+                      <td>
+                        Pastikan semua orang tidak menyentuh pasien saat
+                        analisis AED.
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r3"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r3"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r3"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r3"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+                    <!-- 4 -->
+                    <tr>
+                      <td class="no-col">4.</td>
+                      <td>
+                        Setelah dianalisis, lakukan tindakan sesuai instruksi
+                        AED.
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r4"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r4"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r4"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r4"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+                    <!-- 5 -->
+                    <tr>
+                      <td class="no-col">5.</td>
+                      <td>
+                        a) Jika instruksi <em>shock</em>, pastikan tidak ada
+                        yang menyentuh pasien lalu tekan tombol shock.<br />
+                        b) Jika instruksi CPR, lakukan RJP sesuai tempo selama 2
+                        menit.
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r5"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r5"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r5"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r5"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+                    <!-- 6 -->
+                    <tr>
+                      <td class="no-col">6.</td>
+                      <td>
+                        Melakukan kompresi jantung berkualitas:
+                        <ol class="mb-0">
+                          <li>
+                            Posisi tumit tangan di <em>mid body of sternum</em>
+                          </li>
+                          <li>Rate 100–120/menit</li>
+                          <li>Kedalaman 5–6 cm</li>
+                          <li><em>Full recoil</em></li>
+                          <li>Minim gangguan</li>
+                        </ol>
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r6"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r6"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r6"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r6"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+                    <!-- 7 -->
+                    <tr>
+                      <td class="no-col">7.</td>
+                      <td>
+                        Berikan ventilasi 2 kali menggunakan BVM/CPR mask sesuai
+                        ketersediaan alat.
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r7"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r7"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r7"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r7"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+                    <!-- 8 -->
+                    <tr>
+                      <td class="no-col">8.</td>
+                      <td>
+                        Ikuti petunjuk AED pada evaluasi 2 menit. Jika “no shock
+                        advise”, cek nadi; jika ada nadi matikan AED, jika tidak
+                        ada lanjutkan RJP.
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r8"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r8"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r8"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r8"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+
+                    <!-- Total row -->
+                    <tr>
+                      <td colspan="5" class="text-end fw-semibold">
+                        Total Nilai
+                      </td>
+                      <td class="chk-cell fw-bold">
+                        <span id="totalScore">0</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Keterangan -->
+              <div class="row g-3 mt-2">
+                <div class="col-md-8">
+                  <div class="notes">
+                    <div>
+                      <strong>*</strong> Jika tidak dilakukan, mahasiswa tidak
+                      lulus!
+                    </div>
+                    <div><strong>NBL = &lt;= 65</strong></div>
+                    <div class="mt-2">
+                      Keterangan (beri tanda √ pada angka):
+                    </div>
+                    <ol class="mb-2 ps-3">
+                      <li>Tidak melakukan sesuai prosedur</li>
+                      <li>Melakukan tapi tidak sesuai dengan prosedur</li>
+                      <li>
+                        Melakukan sesuai dengan prosedur tapi tidak dengan baik
+                        dan benar
+                      </li>
+                      <li>
+                        Melakukan sesuai dengan prosedur dengan baik dan benar
+                      </li>
+                    </ol>
+                  </div>
+                  <div class="foot-box mt-2">
+                    Penilaian = <strong>Total Nilai × 10</strong>
+                    <div class="small text-muted">
+                      (<span id="scorePreview">0</span>)
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="d-flex flex-column h-100 justify-content-end">
+                    <div class="text-end mb-5">
+                      <div>Surakarta, ____________ 2025</div>
+                      <div>Penguji,</div>
+                      <div style="height: 70px"></div>
+                      <div class="signature-line"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="page">
+              <!-- Optional controls -->
+              <div class="d-flex justify-content-end gap-2 no-print mb-3">
+                <button
+                  class="btn btn-sm btn-outline-secondary"
+                  onclick="window.print()"
+                >
+                  Cetak
+                </button>
+              </div>
+
+              <!-- Header -->
+              <div class="row align-items-center mb-2">
+                <div class="col-2 text-center">
+                  <img
+                    src="https://dummyimage.com/100x100/cccccc/000000.png&text=LOGO"
+                    alt="Logo"
+                    class="img-fluid"
+                    style="max-height: 90px"
+                  />
+                </div>
+                <div class="col-8">
+                  <div class="doc-title">
+                    Penilaian Pencapaian Kompetensi Aspek Ketrampilan<br />
+                    Resusitasi Jantung Paru (RJP) pada Pasien Dewasa
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="id-box">
+                    <div><label>Nama</label>: __________________</div>
+                    <div><label>NIM</label> : __________________</div>
+                  </div>
+                </div>
+              </div>
+
+              <h6 class="section-title">Prosedur Tindakan</h6>
+
+              <!-- Table -->
+              <div class="table-responsive">
+                <table class="table table-sm form-table">
+                  <thead>
+                    <tr>
+                      <th class="no-col">No.</th>
+                      <th>Aspek yang Dinilai</th>
+                      <th class="nilai-head" colspan="4">Nilai</th>
+                    </tr>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th class="chk-cell">0</th>
+                      <th class="chk-cell">1</th>
+                      <th class="chk-cell">2</th>
+                      <th class="chk-cell">3</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- FASE KERJA header -->
+                    <tr>
+                      <td class="no-col fw-bold">A.</td>
+                      <td class="fw-bold" colspan="5">FASE KERJA</td>
+                    </tr>
+
+                    <!-- 1 -->
+                    <tr>
+                      <td class="no-col">1.</td>
+                      <td>Aman diri, aman lingkungan, dan aman pasien.</td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r1"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r1"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r1"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r1"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+
+                    <!-- 2 -->
+                    <tr>
+                      <td class="no-col">2.</td>
+                      <td>Cek respon pasien, menepuk bahu korban.</td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r2"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r2"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r2"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r2"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+
+                    <!-- 3 -->
+                    <tr>
+                      <td class="no-col">3.</td>
+                      <td>
+                        Mencari bantuan telp 119 (nama, No. HP, jumlah pasien,
+                        kondisi, lokasi) / aktifasi CODE BIRU (jika di RS).
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r3"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r3"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r3"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r3"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+
+                    <!-- 4 -->
+                    <tr>
+                      <td class="no-col">4.</td>
+                      <td>
+                        Meraba nadi karotis dan melihat pernapasan (pengembangan
+                        dada) selama 5–10 detik <span class="crit">*</span>.
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r4"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r4"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r4"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r4"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+
+                    <!-- 5 -->
+                    <tr>
+                      <td class="no-col">5.</td>
+                      <td>
+                        Memposisikan klien: terlentang di dasar yang keras.
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r5"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r5"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r5"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r5"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+
+                    <!-- 6 -->
+                    <tr>
+                      <td class="no-col">6.</td>
+                      <td>
+                        Posisi penolong benar: berjongkok di sisi kanan, sejajar
+                        bahu korban.
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r6"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r6"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r6"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r6"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+
+                    <!-- 7 -->
+                    <tr>
+                      <td class="no-col">7.</td>
+                      <td>
+                        Melakukan kompresi jantung berkualitas (30x):<br />
+                        • Tumit tangan di <em>mid body of sternum</em><br />
+                        • Rate 100–120/menit<br />
+                        • Kedalaman 5–6 cm<br />
+                        • <em>Full recoil</em><br />
+                        • Minim gangguan
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r7"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r7"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r7"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r7"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+
+                    <!-- 8 -->
+                    <tr>
+                      <td class="no-col">8.</td>
+                      <td>
+                        Membebaskan jalan napas:<br />
+                        • <em>Head tilt–chin lift</em> (tanpa trauma
+                        servikal)<br />
+                        • <em>Jaw thrust</em> (bila ada trauma servikal)
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r8"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r8"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r8"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r8"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+
+                    <!-- 9 -->
+                    <tr>
+                      <td class="no-col">9.</td>
+                      <td>
+                        Manuver <em>cross finger</em> untuk membuka mulut;
+                        pastikan tidak ada sumbatan jalan napas.
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r9"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r9"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r9"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r9"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+
+                    <!-- 10 -->
+                    <tr>
+                      <td class="no-col">10.</td>
+                      <td>
+                        Memberikan ventilasi 2 kali menggunakan BVM/CPR mask
+                        sesuai ketersediaan alat.
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r10"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r10"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r10"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r10"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+
+                    <!-- 11 -->
+                    <tr>
+                      <td class="no-col">11.</td>
+                      <td>
+                        Evaluasi setiap 5 siklus (30:2) atau tiap 2 menit
+                        <span class="crit">*</span>.
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r11"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r11"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r11"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r11"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+
+                    <!-- 12 -->
+                    <tr>
+                      <td class="no-col">12.</td>
+                      <td>
+                        Evaluasi nadi karotis & pernapasan 5–10 detik:<br />
+                        1) Jika nadi tidak teraba → “tidak ada nadi – mulai
+                        kompresi” dan RJP dilanjutkan.<br />
+                        2) Jika pulih → posisi mantap (recovery) hingga bantuan
+                        datang.<br />
+                        3) Jika di RS → lakukan perawatan ROSC.
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r12"
+                          value="0"
+                          data-score="0"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r12"
+                          value="1"
+                          data-score="1"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r12"
+                          value="2"
+                          data-score="2"
+                        />
+                      </td>
+                      <td class="chk-cell">
+                        <input
+                          type="radio"
+                          name="r12"
+                          value="3"
+                          data-score="3"
+                        />
+                      </td>
+                    </tr>
+
+                    <!-- TOTAL -->
+                    <tr>
+                      <td colspan="5" class="text-end fw-semibold">
+                        TOTAL POIN
+                      </td>
+                      <td class="chk-cell fw-bold">
+                        <span id="totalScore">0</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Keterangan & Hasil -->
+              <div class="row g-3 mt-2">
+                <div class="col-md-8">
+                  <div class="notes">
+                    <div>
+                      <span class="crit">*</span> Jika tidak dilakukan,
+                      mahasiswa tidak lulus!
+                    </div>
+                    <div><strong>NBL = ≥ 65</strong></div>
+                    <div class="mt-2">
+                      Keterangan (beri tanda √ pada angka):
+                    </div>
+                    <table class="table table-sm mb-2">
+                      <tbody>
+                        <tr>
+                          <td style="width: 40px">0</td>
+                          <td>: Tidak melakukan sesuai prosedur</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>: Melakukan tapi tidak sesuai dengan prosedur</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>
+                            : Melakukan sesuai prosedur tapi belum baik/benar
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>
+                            : Melakukan sesuai prosedur dengan baik dan benar
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="border p-3">
+                    <div>
+                      <strong>Nilai Akhir (%)</strong>:
+                      <span id="finalPct">0</span>
+                    </div>
+                    <div>
+                      Status: <strong id="statusText">Tidak Lulus</strong>
+                    </div>
+                    <div class="text-muted small">
+                      Skor = (Total Poin / Maks 36) × 100
+                    </div>
+                  </div>
+                  <div class="text-end mt-5">
+                    <div>Surakarta, ____________ 2025</div>
+                    <div>Penguji,</div>
+                    <div style="height: 70px"></div>
+                    <div class="signature-line"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %} {% block js %}
+<!-- Optional: small JS to auto-sum total -->
+<script>
+  // Each radio has data-score 0..3; we sum chosen ones.
+  function recalc() {
+    let sum = 0;
+    for (let i = 1; i <= 8; i++) {
+      const chosen = document.querySelector(`input[name="r${i}"]:checked`);
+      if (chosen) sum += parseInt(chosen.dataset.score || "0", 10);
+    }
+    document.getElementById("totalScore").textContent = sum;
+    document.getElementById("scorePreview").textContent = sum * 10;
+  }
+  document.addEventListener("change", (e) => {
+    if (e.target.matches('input[type="radio"][name^="r"]')) recalc();
+  });
+</script>
+{% endblock js %}
