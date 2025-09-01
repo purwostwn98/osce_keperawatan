@@ -25,7 +25,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('landing.urls')),
     path('mahasiswa/', include('mahasiswa.urls')),
-    path('dosen/', include('dosen.urls'))
+    path('dosen/', include('dosen.urls')),
+    path('master/', include('master.urls')),
 ]
 
 # Add static files serving for development

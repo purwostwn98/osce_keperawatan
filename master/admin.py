@@ -1,6 +1,12 @@
 from django.contrib import admin
 from unfold.admin import ModelAdmin, TabularInline
 from unfold.decorators import display
+from django.urls import path, reverse
+from django.shortcuts import redirect
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.template.response import TemplateResponse
+from .views import sync_dosen_view
 
 # Register your models here.
 from .models import Fakultas, ProgramStudi, Mahasiswa, Dosen, KategoriSoal, BankAspekPenilaian, BankSoal, SemesterAkademik
@@ -74,6 +80,21 @@ class DosenAdmin(ModelAdmin):
             'classes': ['collapse']
         }),
     ]
+    
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path('sync-dosen/', self.admin_site.admin_view(sync_dosen_view), name='master_dosen_sync'),
+        ]
+        return custom_urls + urls
+    
+    def changelist_view(self, request, extra_context=None):
+        """
+        Override changelist view untuk menambahkan tombol sync
+        """
+        extra_context = extra_context or {}
+        extra_context['sync_url'] = reverse('admin:master_dosen_sync')
+        return super().changelist_view(request, extra_context=extra_context)
 
 
 class BankAspekPenilaianInline(TabularInline):
