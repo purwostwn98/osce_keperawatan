@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_cas_ng',
     'landing', 'penilaian', 'ujian', 'alokasi', 'master',
     'mahasiswa', 'dosen'
 ]
@@ -54,6 +55,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_cas_ng.middleware.CASMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -363,4 +365,34 @@ UNFOLD = {
             ],
         },
     ],
+}
+
+# CAS Configuration
+CAS_SERVER_URL = config('CAS_SERVER_URL', default='https://auth.ums.ac.id/')
+CAS_VERSION = '3'
+CAS_LOGIN_MSG = "Silakan login menggunakan akun UMS Anda"
+CAS_LOGOUT_COMPLETELY = True
+CAS_PROVIDE_URL_TO_LOGOUT = True
+
+# Authentication backends
+AUTHENTICATION_BACKENDS = [
+    'django_cas_ng.backends.CASBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+# Login/Logout URLs
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/dashboard/'
+LOGOUT_REDIRECT_URL = '/'
+
+# CAS User Creation
+CAS_CREATE_USER = True
+CAS_USERNAME_ATTRIBUTE = 'uid'
+CAS_APPLY_ATTRIBUTES_TO_USER = True
+
+# Optional: Custom attribute mapping
+CAS_RENAME_ATTRIBUTES = {
+    'mail': 'email',
+    'givenName': 'first_name',
+    'sn': 'last_name',
 }
