@@ -5,5 +5,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('login/', views.login_view, name='login'),
     path('dashboard/', views.dashboard_redirect, name='dashboard_redirect'),
-    path('cas-callback/', views.cas_callback, name='cas_callback'),
+    path('cas-login/', views.cas_login, name='cas_login'),
+    path('cas-logout/', views.cas_logout, name='cas_logout'),
 ]

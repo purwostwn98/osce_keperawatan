@@ -60,6 +60,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Authentication backends
+AUTHENTICATION_BACKENDS = [
+    'osce_project.cas_backends.CustomCASBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 ROOT_URLCONF = 'osce_project.urls'
 
 TEMPLATES = [
@@ -368,19 +374,15 @@ UNFOLD = {
 }
 
 # CAS Configuration
-CAS_SERVER_URL = config('CAS_SERVER_URL', default='https://auth.ums.ac.id/')
+CAS_SERVER_URL = config('CAS_SERVER_URL', default='https://auth.ums.ac.id/cas/')
 CAS_VERSION = '3'
-CAS_LOGIN_MSG = "Silakan login menggunakan akun UMS Anda"
+# CAS_LOGIN_MSG = "Selamat datang %s, login berhasil!"  # Comment out to use default
 CAS_LOGOUT_COMPLETELY = True
 CAS_PROVIDE_URL_TO_LOGOUT = True
+CAS_CHECK_NEXT = True
+CAS_IGNORE_REFERER = True
 
-# Authentication backends
-AUTHENTICATION_BACKENDS = [
-    'django_cas_ng.backends.CASBackend',
-    'django.contrib.auth.backends.ModelBackend',
-]
-
-# Login/Logout URLs
+# Login/Logout URLs - Updated for CAS
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
@@ -390,9 +392,39 @@ CAS_CREATE_USER = True
 CAS_USERNAME_ATTRIBUTE = 'uid'
 CAS_APPLY_ATTRIBUTES_TO_USER = True
 
-# Optional: Custom attribute mapping
+# CAS attribute mapping  
 CAS_RENAME_ATTRIBUTES = {
     'mail': 'email',
     'givenName': 'first_name',
     'sn': 'last_name',
+}
+
+# Additional CAS settings for proper service validation
+CAS_FORCE_CHANGE_USERNAME_CASE = 'lower'
+CAS_STORE_NEXT = True
+
+# CAS SSL settings (for development - disable SSL verification)
+CAS_VERIFY_SSL_CERTIFICATE = False
+
+# Logging configuration for debugging CAS
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django_cas_ng': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'osce_project.cas_backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
 }
