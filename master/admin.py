@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.template.response import TemplateResponse
-from .views import sync_dosen_view
+from .views import sync_dosen_view, sync_mahasiswa_view
 
 # Register your models here.
 from .models import Fakultas, ProgramStudi, Mahasiswa, Dosen, KategoriSoal, BankAspekPenilaian, BankSoal, SemesterAkademik
@@ -61,6 +61,21 @@ class MahasiswaAdmin(ModelAdmin):
             'fields': ['email', 'no_hp', 'alamat']
         }),
     ]
+    
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path('sync-mahasiswa/', self.admin_site.admin_view(sync_mahasiswa_view), name='master_mahasiswa_sync'),
+        ]
+        return custom_urls + urls
+    
+    def changelist_view(self, request, extra_context=None):
+        """
+        Override changelist view untuk menambahkan tombol sync
+        """
+        extra_context = extra_context or {}
+        extra_context['sync_url'] = reverse('admin:master_mahasiswa_sync')
+        return super().changelist_view(request, extra_context=extra_context)
 
 
 @admin.register(Dosen)
