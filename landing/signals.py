@@ -9,16 +9,16 @@ def assign_user_group(sender, request, user, **kwargs):
     Automatically assign users to appropriate groups based on their profile
     """
     # Only process for CAS-authenticated users
-    if hasattr(request, 'session') and request.session.get('_auth_user_backend') == 'django_cas_ng.backends.CASBackend':
+    if hasattr(request, 'session') and request.session.get('_auth_user_backend') == 'osce_project.cas_backends.CustomCASBackend':
         try:
-            # Check if user is a dosen
-            if Dosen.objects.filter(user=user).exists():
-                group, created = Group.objects.get_or_create(name='dosen')
-                user.groups.add(group)
-                
-            # Check if user is a mahasiswa  
-            elif Mahasiswa.objects.filter(user=user).exists():
+            # If username > 5 characters, likely mahasiswa (NIM)
+            # If username < 5 characters, likely dosen (UNIID)
+            
+            if len(user.username) > 5:
                 group, created = Group.objects.get_or_create(name='mahasiswa')
+                user.groups.add(group)
+            else:
+                group, created = Group.objects.get_or_create(name='dosen')
                 user.groups.add(group)
                 
         except Exception as e:
@@ -26,3 +26,4 @@ def assign_user_group(sender, request, user, **kwargs):
             import logging
             logger = logging.getLogger(__name__)
             logger.error(f"Error assigning group to user {user.username}: {e}")
+            print(f"Error assigning group to user {user.username}: {e}")
