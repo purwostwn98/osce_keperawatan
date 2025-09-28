@@ -7,3 +7,4 @@ db.sqlite3
 
 # Django stuff:
 staticfiles/
+db.sqlite3
