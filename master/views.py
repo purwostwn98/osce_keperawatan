@@ -234,22 +234,94 @@ def sync_mahasiswa_view(request):
     Mendukung AJAX request dari admin interface
     """
     if request.method == 'POST':
-        result = sync_mahasiswa_data()
-        
+        # Ambil parameter dari form POST
+        prodi = request.POST.get('prodi')
+        angkatan = request.POST.get('angkatan')
+        # Jalankan sinkronisasi dengan parameter
+        def sync_mahasiswa_data_with_param(prodi, angkatan):
+            success_count = 0
+            updated_count = 0
+            created_count = 0
+            try:
+                api_client = APIClient()
+                api_mahasiswa_data = api_client.get_mahasiswa_data(prodi=prodi, angkatan=angkatan)
+                if not api_mahasiswa_data:
+                    return {
+                        'status': 'error',
+                        'message': 'No mahasiswa data received from API or failed to get API token',
+                        'data': {
+                            'success_count': 0,
+                            'created_count': 0,
+                            'updated_count': 0
+                        }
+                    }
+                from django.db import transaction
+                with transaction.atomic():
+                    for mahasiswa_data in api_mahasiswa_data:
+                        try:
+                            if not validate_mahasiswa_data(mahasiswa_data):
+                                continue
+                            normalized_data = normalize_mahasiswa_data(mahasiswa_data)
+                            program_studi = None
+                            if 'prodi' in normalized_data:
+                                try:
+                                    program_studi = ProgramStudi.objects.filter(kode_prodi__icontains=normalized_data['prodi']).first()
+                                    if not program_studi:
+                                        program_studi = ProgramStudi.objects.filter(nama_prodi__icontains=normalized_data['prodi']).first()
+                                except Exception:
+                                    pass
+                            if not program_studi:
+                                continue
+                            mahasiswa, created = Mahasiswa.objects.update_or_create(
+                                nim=normalized_data['nim'],
+                                defaults={
+                                    'nama_mahasiswa': normalized_data['nama_mahasiswa'],
+                                    'program_studi': program_studi,
+                                    'semester': normalized_data.get('semester', 1),
+                                    'angkatan': normalized_data.get('angkatan', 2024),
+                                    'email': normalized_data.get('email', ''),
+                                    'no_hp': normalized_data.get('no_hp', ''),
+                                    'alamat': normalized_data.get('alamat', '')
+                                }
+                            )
+                            if created:
+                                created_count += 1
+                            else:
+                                updated_count += 1
+                            success_count += 1
+                        except Exception:
+                            continue
+                return {
+                    'status': 'success',
+                    'message': f'Mahasiswa sync completed: {created_count} created, {updated_count} updated',
+                    'data': {
+                        'success_count': success_count,
+                        'created_count': created_count,
+                        'updated_count': updated_count
+                    }
+                }
+            except Exception as e:
+                return {
+                    'status': 'error',
+                    'message': f'Critical error during mahasiswa sync: {str(e)}',
+                    'data': {
+                        'success_count': success_count,
+                        'created_count': created_count,
+                        'updated_count': updated_count
+                    }
+                }
+        result = sync_mahasiswa_data_with_param(prodi, angkatan)
         # Untuk AJAX request, return JSON response
-        if request.headers.get('Content-Type') == 'application/json' or request.META.get('HTTP_ACCEPT', '').find('application/json') != -1:
+        if request.headers.get('Content-Type') == 'application/json' or request.META.get('HTTP_ACCEPT', '').find('application/json') != -1 or request.content_type.startswith('multipart/form-data'):
             return JsonResponse(result)
-        
         # Untuk request biasa, set messages dan redirect
         if result['status'] == 'success':
             messages.success(request, result['message'])
         else:
             messages.error(request, result['message'])
-        
         from django.shortcuts import redirect
         from django.urls import reverse
         return redirect(reverse('admin:master_mahasiswa_changelist'))
-    
     return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
 
 def get_mahasiswa_profile_view(request):
