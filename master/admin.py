@@ -71,10 +71,14 @@ class MahasiswaAdmin(ModelAdmin):
     
     def changelist_view(self, request, extra_context=None):
         """
-        Override changelist view untuk menambahkan tombol sync
+        Override changelist view untuk menambahkan tombol sync dan dropdown tahun angkatan
         """
+        import datetime
         extra_context = extra_context or {}
         extra_context['sync_url'] = reverse('admin:master_mahasiswa_sync')
+        # Dropdown tahun angkatan: 5 tahun terakhir dari tahun sekarang
+        current_year = datetime.datetime.now().year
+        extra_context['angkatan_years'] = [str(current_year - i) for i in range(10)]
         return super().changelist_view(request, extra_context=extra_context)
 
 
