@@ -19,10 +19,13 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
-
+import django_cas_ng.views as cas_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/login/', cas_views.LoginView.as_view(), name='cas_ng_login'),
+    path('accounts/logout/', cas_views.LogoutView.as_view(), name='cas_ng_logout'),
+    path('accounts/callback/', cas_views.CallbackView.as_view(), name='cas_ng_proxy_callback'),
     path('', include('landing.urls')),
     path('mahasiswa/', include('mahasiswa.urls')),
     path('dosen/', include('dosen.urls')),

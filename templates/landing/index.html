@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="id">
   <head>
@@ -523,15 +524,28 @@
             <li class="nav-item">
               <a class="nav-link" href="#contact">Kontak</a>
             </li>
+            {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link btn btn-outline-light ms-lg-3" href="/login">
+              <a class="nav-link btn btn-outline-light ms-lg-3" href="{% url 'dashboard_redirect' %}">
+                Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn  btn-outline-light ms-lg-2" href="{% url 'cas_logout' %}">
+                Logout
+              </a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link btn btn-outline-light ms-lg-3" href="{% url 'cas_login' %}">
                 Login
               </a>
             </li>
+            {% endif %}
           </ul>
         </div>
       </div>
-    </nav>
+    </nav>>
 
     <!-- Hero Section -->
     <section id="home" class="hero-section">
